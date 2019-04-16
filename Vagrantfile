@@ -23,7 +23,7 @@ Vagrant.configure("2") do |config|
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
   # NOTE: This will enable public access to the opened port
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 3001, host: 3001
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine and only allow access
@@ -56,6 +56,7 @@ Vagrant.configure("2") do |config|
     # Customize the amount of memory on the VM:
     vb.memory = "4096"
   end
+  config.vm.synced_folder "./init", "/home/vagrant/init", owner: "vagrant", group: "vagrant"
   config.vm.synced_folder "./source", "/home/vagrant/source", owner: "vagrant", group: "vagrant"
   #
   # View the documentation for the provider you are using for more
@@ -68,4 +69,5 @@ Vagrant.configure("2") do |config|
   #   apt-get update
   #   apt-get install -y apache2
   # SHELL
+  # config.vm.provision "shell", path: "init/init.sh"
 end
